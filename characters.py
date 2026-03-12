@@ -75,17 +75,9 @@ class Orca(Enemy):
 class Delfin(Enemy):
     def __init__(self, nombre, vida, daño):
         super().__init__(nombre, vida, daño)
-    
+        
     def atacar(self, objetivo):
-        objetivo.recibir_daño(self._daño)
-    
-    # ANTERIOR DELFIN ATACA
-    # def atacar(self, objetivo1, objetivo2):
-    #     if objetivo1.vida > 0:
-    #         objetivo1.recibir_daño(self._daño)
-
-    #     if objetivo2.vida > 0:
-    #         objetivo2.recibir_daño(self._daño)
+        objetivo.recibir_daño(self._daño // 2)
 
 
 class Ally(Character):

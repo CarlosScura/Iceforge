@@ -1,5 +1,7 @@
 INICIO JUEGO 
-crear personajes Aparecen el pinguino y su aliado (otro pinguino por ahora) Aparecen los enemigos (Una orca y un delfin, por ahora) MIENTRAS juego_activo:
+crear personajes Aparecen el pinguino y su aliado (otro pinguino por ahora) 
+Aparecen los enemigos (Una orca y un delfin, por ahora) 
+MIENTRAS juego_activo:
 
 TURNO PINGÜINO
 
@@ -48,3 +50,12 @@ Character (abstracta)
     Ally (hereda de Character)
     ├── Atributos extra: ninguno
     └── Métodos propios o que sobreescribe: ninguno
+
+    
+    # ANTERIOR DELFIN ATACA
+    # def atacar(self, objetivo1, objetivo2):
+    #     if objetivo1.vida > 0:
+    #         objetivo1.recibir_daño(self._daño)
+
+    #     if objetivo2.vida > 0:
+    #         objetivo2.recibir_daño(self._daño)

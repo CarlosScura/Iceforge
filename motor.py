@@ -39,6 +39,8 @@ class Game():
         while self.pinguino.vida > 0 and (self.orca.vida > 0 or self.delfin.vida > 0):
 
             UI.mostrar_estado(self.pinguino,self.oso,self.orca,self.delfin)
+            
+            # TURNO DEL PINGUINO
 
             self._turno +=1
             
@@ -56,6 +58,8 @@ class Game():
             if not self.chequear_enemigos():
                 break
             
+            # TURNO DEL OSO
+
             self._turno +=1
             
             if self.orca.vida > 0 and self.delfin.vida >0:
@@ -70,6 +74,8 @@ class Game():
             if not self.chequear_enemigos():
                 break
 
+            # TURNO DE LA ORCA
+
             self._turno +=1
             
             if self.oso.vida > 0:
@@ -80,9 +86,13 @@ class Game():
             if objetivo == self.pinguino:
                 if not self.pinguino.esquivar():
                     self.orca.atacar(objetivo)
+            else:
+                self.orca.atacar(objetivo)
 
             if not self.chequear_pinguino():
                 break
+
+            # TURNO DEL DELFIN
 
             self._turno +=1
 
