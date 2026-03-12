@@ -55,39 +55,49 @@ class Game():
             
             self.pinguino.atacar(objetivo)
 
+            UI.info_turno(self.pinguino, objetivo)
+
             if not self.chequear_enemigos():
                 break
             
             # TURNO DEL OSO
 
-            self._turno +=1
-            
-            if self.orca.vida > 0 and self.delfin.vida >0:
-                objetivo = random.choice([self.orca, self.delfin])
-            elif self.orca.vida > 0:
-                objetivo = self.orca
-            else:
-                objetivo = self.delfin
-            
-            self.oso.curar(self.pinguino, objetivo)
+            self._turno += 1
 
+            if self.oso.vida > 0:
+                if self.orca.vida > 0 and self.delfin.vida > 0:
+                    objetivo = random.choice([self.orca, self.delfin])
+                elif self.orca.vida > 0:
+                    objetivo = self.orca
+                else:
+                    objetivo = self.delfin
+
+                if self.pinguino.vida <= self.pinguino.max_vida / 2:
+                    UI.oso_curo(self.oso, self.pinguino)
+                else:
+                    UI.info_turno(self.oso, objetivo)
+
+                self.oso.curar(self.pinguino, objetivo)
+                
             if not self.chequear_enemigos():
                 break
 
             # TURNO DE LA ORCA
 
             self._turno +=1
-            
-            if self.oso.vida > 0:
-                objetivo = random.choice([self.oso, self.pinguino])
-            else:
-                objetivo = self.pinguino
-            
-            if objetivo == self.pinguino:
-                if not self.pinguino.esquivar():
+            if self.orca.vida > 0:
+                if self.oso.vida > 0:
+                    objetivo = random.choice([self.oso, self.pinguino])
+                else:
+                    objetivo = self.pinguino
+                
+                if objetivo == self.pinguino:
+                    if not self.pinguino.esquivar():
+                        self.orca.atacar(objetivo)
+                        UI.info_turno(self.orca, objetivo)
+                else:
                     self.orca.atacar(objetivo)
-            else:
-                self.orca.atacar(objetivo)
+                    UI.info_turno(self.orca, objetivo)
 
             if not self.chequear_pinguino():
                 break
@@ -96,10 +106,13 @@ class Game():
 
             self._turno +=1
 
-            if not self.pinguino.esquivar():
-                self.delfin.atacar(self.pinguino)
-            if self.oso.vida > 0:
-                self.delfin.atacar(self.oso)
+            if self.delfin.vida > 0:
+                if not self.pinguino.esquivar():
+                    self.delfin.atacar(self.pinguino)
+                    UI.info_turno(self.delfin, self.pinguino)
+                if self.oso.vida > 0:
+                    self.delfin.atacar(self.oso)
+                    UI.info_turno(self.delfin, self.oso)
 
             if not self.chequear_pinguino():
                 break

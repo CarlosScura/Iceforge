@@ -31,3 +31,9 @@ def mostrar_resultado(gano, rondas, turnos):
     else:
         print("💀 ¡DERROTA! El pingüino no lo logró...")
     print(f"El juego duró {rondas} rondas y {turnos} turnos.")
+
+def info_turno(personaje, objetivo):
+    print(f"{personaje.nombre} atacó a {objetivo.nombre}\n")
+
+def oso_curo(oso, pinguino):
+    print(f"{oso.nombre} curo a {pinguino.nombre}\n")
