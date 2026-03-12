@@ -38,7 +38,10 @@ class Game():
         
         while self.pinguino.vida > 0 and (self.orca.vida > 0 or self.delfin.vida > 0):
 
+            UI.mostrar_estado(self.pinguino,self.oso,self.orca,self.delfin)
+
             self._turno +=1
+            
             enemigos = []       
             if self.orca.vida > 0 :
                 enemigos.append(self.orca)
@@ -74,17 +77,29 @@ class Game():
             else:
                 objetivo = self.pinguino
             
-            self.orca.atacar(objetivo)
+            if objetivo == self.pinguino:
+                if not self.pinguino.esquivar():
+                    self.orca.atacar(objetivo)
 
             if not self.chequear_pinguino():
                 break
 
             self._turno +=1
 
-            self.delfin.atacar(self.pinguino, self.oso)
+            if not self.pinguino.esquivar():
+                self.delfin.atacar(self.pinguino)
+            if self.oso.vida > 0:
+                self.delfin.atacar(self.oso)
 
             if not self.chequear_pinguino():
                 break
 
             self._ronda += 1
             self._turno = 0
+        
+        if self.chequear_pinguino():
+            gano = True
+        else:
+            gano = False
+
+        UI.mostrar_resultado(gano,self._ronda,self._turno)
