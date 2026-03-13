@@ -120,9 +120,13 @@ class Game():
             self._ronda += 1
             self._turno = 0
         
+        # chequea si al final del juego el pinguino esta vivo
+
         if self.chequear_pinguino():
             gano = True
         else:
             gano = False
+
+        # llama a mostrar el resultado
 
         UI.mostrar_resultado(gano,self._ronda,self._turno)

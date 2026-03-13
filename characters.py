@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 import random
 
-# creamos la clase Character abstracta de la cual heredan las demas clases.
+# creamos la clase Character abstracta de la cual heredan las demas clases
+
 class Character(ABC):
     def __init__(self,nombre,vida,daño):
         self._nombre = nombre
@@ -9,7 +10,8 @@ class Character(ABC):
         self._max_vida = vida
         self._daño = daño
     
-    # creamos el metodo atacar que es abstracto porque hay clases hijas que la implementan distinto.
+    # creamos el metodo atacar que es abstracto porque hay clases hijas que la implementan distinto
+
     @abstractmethod
     def atacar(self, objetivo):
         pass
@@ -17,7 +19,8 @@ class Character(ABC):
     def recibir_daño(self,ataque):
         self._vida = max(0, self._vida - ataque)
     
-    # creamos los getter que vamos a necesitar mas adelante.
+    # creamos los getter que vamos a necesitar
+
     @property
     def nombre(self):
         return self._nombre
@@ -30,6 +33,7 @@ class Character(ABC):
     def max_vida(self):
         return self._max_vida
 
+# creamo la clase Player hija de Character
 
 class Player(Character):
     def __init__(self, nombre, vida, daño, agilidad, velocidad):
@@ -58,6 +62,7 @@ class Player(Character):
     def cura(self, curacion):
         self._vida = min(self._max_vida, self._vida + curacion)
 
+# creamos la clase Enemy hija de Character
 
 class Enemy(Character):
     def __init__(self, nombre, vida, daño):
@@ -66,19 +71,24 @@ class Enemy(Character):
     def atacar(self, objetivo):
         objetivo.recibir_daño(self._daño)
 
+# creamos la clase Orca hija de Enemy
 
 class Orca(Enemy):
     def __init__(self, nombre, vida, daño):
         super().__init__(nombre, vida, daño)
 
+# creamos la clase delfin hija de Enemy
 
 class Delfin(Enemy):
     def __init__(self, nombre, vida, daño):
         super().__init__(nombre, vida, daño)
-        
+    
+    # ataca a ambos pero con mitad de daño
+
     def atacar(self, objetivo):
         objetivo.recibir_daño(self._daño // 2)
 
+# creamos la clase Ally hija de Character
 
 class Ally(Character):
     def __init__(self, nombre, vida, daño, curacion):

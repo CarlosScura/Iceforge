@@ -1,3 +1,6 @@
+
+# Pide al usuario que decida a que objetivo atacar
+
 def pedir_objetivo(enemigos):
     if len(enemigos) > 1:
         print("Selecciona un enemigo:\n")
@@ -17,6 +20,8 @@ def pedir_objetivo(enemigos):
     
     return objetivo
 
+# muestra el estado de los persojanes al ususario
+
 def mostrar_estado(pinguino, oso, orca, delfin):
     print("\n===== ESTADO DEL JUEGO =====")
     print(f"🐧 {pinguino.nombre}: {pinguino.vida}/{pinguino.max_vida} ❤️")
@@ -25,6 +30,8 @@ def mostrar_estado(pinguino, oso, orca, delfin):
     print(f"🐬 {delfin.nombre}: {delfin.vida}/{delfin.max_vida} ❤️")
     print("============================\n")
 
+# muestra el resultado del juego
+
 def mostrar_resultado(gano, rondas, turnos):
     if gano:
         print("🎉 ¡VICTORIA! ¡El pingüino sobrevivió!")
@@ -32,8 +39,12 @@ def mostrar_resultado(gano, rondas, turnos):
         print("💀 ¡DERROTA! El pingüino no lo logró...")
     print(f"El juego duró {rondas} rondas y {turnos} turnos.")
 
+# muestra quien ataco a quein en el turno
+
 def info_turno(personaje, objetivo):
     print(f"{personaje.nombre} atacó a {objetivo.nombre}\n")
+
+# muestra si el oso curo al pinguino
 
 def oso_curo(oso, pinguino):
     print(f"{oso.nombre} curo a {pinguino.nombre}\n")
